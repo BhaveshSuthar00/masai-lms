@@ -3,16 +3,14 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { logout } from "../../firebase";
 import { logOut } from "../../redux/Login";
 
 export const Navbar = () => {
-  const { status } = useSelector((store) => store.loginInfo);
+  const { status, role } = useSelector((store) => store.loginInfo);
   const dispatch = useDispatch();
-  console.log(status);
   return (
-    <Box m={3}>
-      <ButtonGroup spacing={2} colorScheme="blackAlpha" variant={"ghost"}>
+    <Box mt={3} mb={3} borderBottom={"1px solid black"}>
+      <ButtonGroup spacing={2} colorScheme="transparant" variant={"ghost"}>
         {status && <Button onClick={() => dispatch(logOut())}>SignOut</Button>}
         {!status && (
           <Button as={Link} to="/login">
@@ -24,18 +22,17 @@ export const Navbar = () => {
             Signup
           </Button>
         )}
-        <Button as={Link} to="/home">
-          Home
-        </Button>
         <Button as={Link} to="/lectures">
           Lectures
         </Button>
         <Button as={Link} to="/assignments">
           Assignments
         </Button>
-        <Button as={Button} to="/admin">
-          Admin
-        </Button>
+        {role && role === "admin" && (
+          <Button as={Link} to="/admin">
+            Admin
+          </Button>
+        )}
       </ButtonGroup>
     </Box>
   );

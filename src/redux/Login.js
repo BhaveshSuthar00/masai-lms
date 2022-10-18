@@ -16,14 +16,15 @@ const slice = createSlice({
   reducers: {
     getLoginInfo: (state, action) => {
       state.status = true;
-      state.email = action.email;
-      state.role = action.role;
-      state.uid = action.uid;
-      state.name = action.name;
+      state.email = action.payload.email;
+      state.role = action.payload.role;
+      state.uid = action.payload.uid;
+      state.name = action.payload.name;
     },
     reset: (state, action) => {
       state.role = "";
       state.uid = "";
+      state.status = false;
       state.name = "";
       state.email = "";
       state.status = "";
@@ -40,10 +41,10 @@ export const loginCheck = () => async (dispatch) => {
         let q = query(collection(db, "users"), where("uid", "==", user.uid));
         const data = await getDocs(q);
         data.forEach((doc) => {
-          console.log(doc.data());
-          dispatch(getLoginInfo(doc.data()));
+          const { role, uid, name, email } = doc.data();
+          dispatch(getLoginInfo({ role, uid, name, email }));
         });
-      } else return null;
+      } else dispatch(reset());
     });
   } catch (e) {
     console.log(e);
@@ -52,7 +53,6 @@ export const loginCheck = () => async (dispatch) => {
 
 export const logOut = () => async (dispatch) => {
   try {
-    console.log("ehre ");
     signOut(auth);
     dispatch(reset());
   } catch (e) {

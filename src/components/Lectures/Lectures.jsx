@@ -1,22 +1,24 @@
-import { Box } from "@chakra-ui/react";
-import axios from "axios";
+import { Box, Text } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-
+import { useDispatch, useSelector } from "react-redux";
+import { getLectures } from "../../redux/LecturesData";
+import { v4 as uuid } from "uuid";
+import moment from "moment";
+import { Link } from "react-router-dom";
+import { List } from "../common/List";
 export const Lectures = () => {
-  let [lec, setLec] = useState([]);
-  let getLectures = async () => {
-    try {
-      const lectures = await axios.get(``);
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  const { currentPage, lectures } = useSelector((store) => store.Lectures);
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    // getLectures();
+    dispatch(getLectures());
   }, []);
   return (
-    <>
-      <Box></Box>
-    </>
+    <Box>
+      <Box w={"80%"} ml="auto" mr="auto">
+        {lectures &&
+          lectures.map((item) => <List item={{ ...item, link: "lectures" }} />)}
+      </Box>
+    </Box>
   );
 };
