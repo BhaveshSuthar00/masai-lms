@@ -1,4 +1,3 @@
-import { getAnalytics } from "firebase/analytics";
 import { initializeApp } from "firebase/app";
 import {
   getFirestore,
@@ -8,7 +7,6 @@ import {
   where,
   addDoc,
 } from "firebase/firestore";
-// ​​import {​​ GoogleAuthProvider, getAuth } from "firebase/auth";
 import {
   GoogleAuthProvider,
   getAuth,

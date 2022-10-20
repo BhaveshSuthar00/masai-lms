@@ -1,6 +1,6 @@
 // export const BASICURL = `http://localhost:3001`;
 
-export const BASICURL = `https://masai-lms-lpg.herokuapp.com/`;
+export const BASICURL = `https://masai-lms-lpg.herokuapp.com`;
 
 export const instructorList = [
   "Akshay Gupta",
