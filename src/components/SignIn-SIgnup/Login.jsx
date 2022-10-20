@@ -31,7 +31,7 @@ export const Login = () => {
     }
     if (user) {
       dispatch(loginCheck());
-      navigate("/");
+      navigate("/lectures");
     }
   }, [user, loading]);
   return (

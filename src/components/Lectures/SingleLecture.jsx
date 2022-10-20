@@ -8,13 +8,14 @@ import moment from "moment";
 import { v4 as uuid } from "uuid";
 import { colorFun } from "../../constants/common";
 export const SingleLecture = () => {
-  const { currentLecture } = useSelector((store) => store.Lectures);
+  const { currentLecture, loader } = useSelector((store) => store.Lectures);
+
   const { id } = useParams();
   const dispatch = useDispatch();
-  console.log(currentLecture);
   useEffect(() => {
     dispatch(getCurrentLecture(id));
   }, [id]);
+  if (loader) return <></>;
   return (
     <>
       <Box>

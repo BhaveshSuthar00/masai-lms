@@ -8,6 +8,7 @@ import { SignUp } from "./SignIn-SIgnup/Signup";
 import { useSelector } from "react-redux";
 import { SingleLecture } from "./Lectures/SingleLecture";
 import { SingleAssignment } from "./Assignments/SingleAssignment";
+import { Checker } from "./Checker/Checker";
 export const Router = () => {
   const { role } = useSelector((store) => store.loginInfo);
   return (
@@ -16,9 +17,18 @@ export const Router = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/lectures" element={<Lectures />} />
-      <Route path="/lectures/:id" element={<SingleLecture />} />
-      <Route path="/assignments" element={<Assignments />} />
-      <Route path="/assignments/:id" element={<SingleAssignment />} />
+      <Route
+        path="/lectures/:id"
+        element={<Checker element={<SingleLecture />} />}
+      />
+      <Route
+        path="/assignments"
+        element={<Checker element={<Assignments />} />}
+      />
+      <Route
+        path="/assignments/:id"
+        element={<Checker element={<SingleAssignment />} />}
+      />
       {role && role === "admin" && <Route path="/admin" element={<Admin />} />}
     </Routes>
   );

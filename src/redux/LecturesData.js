@@ -8,6 +8,7 @@ const slice = createSlice({
     lectures: [],
     currentPage: 1,
     totalPages: 1,
+    loader: true,
     currentLecture: {},
   },
   reducers: {
@@ -20,11 +21,16 @@ const slice = createSlice({
     },
     setCurrentLecture: (state, action) => {
       state.currentLecture = action.payload;
+      state.loader = false;
+    },
+    setLoader: (state, action) => {
+      state.loader = action.payload;
     },
   },
 });
 
-export const { addLectures, setCurrentPage, setCurrentLecture } = slice.actions;
+export const { addLectures, setCurrentPage, setLoader, setCurrentLecture } =
+  slice.actions;
 
 export const getLectures = () => async (dispatch, getState) => {
   try {
@@ -41,6 +47,7 @@ export const getLectures = () => async (dispatch, getState) => {
 
 export const getCurrentLecture = (id) => async (dispatch) => {
   try {
+    dispatch(setLoader(true));
     const lecture = await axios.get(`${BASICURL}/lecture/${id}`);
     dispatch(setCurrentLecture(lecture.data));
   } catch (error) {
