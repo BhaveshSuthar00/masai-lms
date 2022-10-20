@@ -6,13 +6,21 @@ import moment from "moment";
 import { colorFun } from "../../constants/common";
 export const List = ({ item }) => {
   return (
-    <Box key={uuid()} p={3} w={"100%"} border="1px solid black">
+    <Box
+      key={uuid()}
+      p={3}
+      w={"100%"}
+      boxShadow={"sm"}
+      border="0 solid #e5e7eb"
+      _hover={{ backgroundColor: "gray.100" }}
+    >
       <Box>
         <Box
           as={Link}
           to={`/${item.link}/${item._id}`}
-          color={"blue.700"}
+          color={"darkblue"}
           fontSize="xl"
+          _hover={{ textDecoration: "underline" }}
         >
           {item.headers}
         </Box>

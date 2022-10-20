@@ -9,27 +9,77 @@ export const Navbar = () => {
   const { status, role } = useSelector((store) => store.loginInfo);
   const dispatch = useDispatch();
   return (
-    <Box mt={3} mb={3} borderBottom={"1px solid black"}>
-      <ButtonGroup spacing={2} colorScheme="transparant" variant={"ghost"}>
-        {status && <Button onClick={() => dispatch(logOut())}>SignOut</Button>}
+    <Box
+      mt={3}
+      mb={3}
+      textUnderlineOffset={13}
+      borderBottom={"1px solid black"}
+    >
+      <ButtonGroup spacing={1} colorScheme="transparant" variant={"ghost"}>
+        {status && (
+          <Button
+            onClick={() => dispatch(logOut())}
+            _hover={{
+              textDecoration: "underline",
+              textDecorationColor: "gray.300",
+            }}
+          >
+            SignOut
+          </Button>
+        )}
         {!status && (
-          <Button as={Link} to="/login">
+          <Button
+            as={Link}
+            to="/login"
+            _hover={{
+              textDecoration: "underline",
+              textDecorationColor: "gray.300",
+            }}
+          >
             Login
           </Button>
         )}
         {!status && (
-          <Button as={Link} to="/signup">
+          <Button
+            as={Link}
+            to="/signup"
+            _hover={{
+              textDecoration: "underline",
+              textDecorationColor: "gray.300",
+            }}
+          >
             Signup
           </Button>
         )}
-        <Button as={Link} to="/lectures">
+        <Button
+          as={Link}
+          to="/lectures"
+          _hover={{
+            textDecoration: "underline",
+            textDecorationColor: "gray.300",
+          }}
+        >
           Lectures
         </Button>
-        <Button as={Link} to="/assignments">
+        <Button
+          as={Link}
+          to="/assignments"
+          _hover={{
+            textDecoration: "underline",
+            textDecorationColor: "gray.300",
+          }}
+        >
           Assignments
         </Button>
         {role && role === "admin" && (
-          <Button as={Link} to="/admin">
+          <Button
+            as={Link}
+            to="/admin"
+            _hover={{
+              textDecoration: "underline",
+              textDecorationColor: "gray.300",
+            }}
+          >
             Admin
           </Button>
         )}

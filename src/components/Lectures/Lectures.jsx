@@ -5,6 +5,7 @@ import { getLectures } from "../../redux/LecturesData";
 import { v4 as uuid } from "uuid";
 import { List } from "../common/List";
 import { useNavigate } from "react-router-dom";
+import Pagination from "./Pangination";
 export const Lectures = () => {
   const { currentPage, lectures } = useSelector((store) => store.Lectures);
   const { role } = useSelector((store) => store.loginInfo);
@@ -24,6 +25,7 @@ export const Lectures = () => {
           lectures.map((item) => (
             <List key={uuid()} item={{ ...item, link: "lectures" }} />
           ))}
+        <Pagination />
       </Box>
     </Box>
   );

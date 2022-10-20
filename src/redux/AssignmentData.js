@@ -20,7 +20,7 @@ const slice = createSlice({
   },
 });
 
-const { addAssignments, currentPage } = slice.actions;
+const { addAssignments, setCurrentPage } = slice.actions;
 
 export const getAssignments = () => async (dispatch, getState) => {
   try {
