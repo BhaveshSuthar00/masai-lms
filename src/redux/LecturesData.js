@@ -50,7 +50,6 @@ export const getLectures = () => async (dispatch, getState) => {
     const data = await axios.get(
       `${BASICURL}/lecture?size=3&page=${currentPage}`
     );
-    console.log(data.data);
     dispatch(addLectures(data.data));
     dispatch(setListLoader(false));
   } catch (error) {

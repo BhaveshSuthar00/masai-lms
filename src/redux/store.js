@@ -5,7 +5,7 @@ import Login from "./Login";
 
 const reducer = combineReducers({
   Lectures: LecturesData,
-  assignments: AssignmentData,
+  Assignments: AssignmentData,
   loginInfo: Login,
 });
 export const store = configureStore({ reducer });
