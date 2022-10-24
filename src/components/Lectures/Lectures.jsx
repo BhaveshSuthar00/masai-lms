@@ -6,6 +6,7 @@ import { v4 as uuid } from "uuid";
 import { List } from "../common/List";
 import { useNavigate } from "react-router-dom";
 import Pagination from "./Pangination";
+import { Filter } from "./Filter";
 export const Lectures = () => {
   const { currentPage, lectures } = useSelector((store) => store.Lectures);
   const { role } = useSelector((store) => store.loginInfo);
@@ -21,6 +22,7 @@ export const Lectures = () => {
   return (
     <Box>
       <Box w={"80%"} ml="auto" mr="auto">
+        <Filter />
         {lectures &&
           lectures.map((item) => (
             <List key={uuid()} item={{ ...item, link: "lectures" }} />

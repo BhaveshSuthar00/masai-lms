@@ -14,7 +14,7 @@ export const Assignments = () => {
   }, []);
   return (
     <>
-      <Box>
+      <Box w={"80%"} ml="auto" mr="auto">
         {assignments &&
           assignments.map((item) => (
             <List key={uuid()} item={{ ...item, link: "assignments" }} />
