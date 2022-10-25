@@ -26,6 +26,8 @@ const AssignmentPagination = () => {
   if (ListLoader) {
     return <></>;
   }
+  if (totalPages === 0) return <></>;
+
   return (
     <Box
       display="flex"

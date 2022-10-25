@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getLectures } from "../../redux/LecturesData";
@@ -7,6 +7,7 @@ import { List } from "../common/List";
 import { useNavigate } from "react-router-dom";
 import Pagination from "./Pangination";
 import { Filter } from "./Filter";
+import { PP } from "../common/PP";
 export const Lectures = () => {
   const { currentPage, lectures } = useSelector((store) => store.Lectures);
   const { role } = useSelector((store) => store.loginInfo);
@@ -21,7 +22,8 @@ export const Lectures = () => {
   // }, [role]);
   return (
     <Box>
-      <Box w={"80%"} ml="auto" mr="auto">
+      <PP title={"Lectures"} />
+      <Box w={"80%"} ml="auto" mr="auto" boxShadow={"md"} mt={16}>
         <Filter />
         {lectures &&
           lectures.map((item) => (

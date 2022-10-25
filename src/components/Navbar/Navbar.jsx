@@ -1,21 +1,23 @@
-import { Box, Button, ButtonGroup } from "@chakra-ui/react";
+import { Box, Image, Button, ButtonGroup } from "@chakra-ui/react";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { logOut } from "../../redux/Login";
+import Masai from "../../Assets/Masai.svg";
 export const Navbar = () => {
   const { status, role } = useSelector((store) => store.loginInfo);
   const dispatch = useDispatch();
   return (
     <Box
-      mt={3}
-      mb={3}
-      textUnderlineOffset={13}
+      textUnderlineOffset={19}
       borderBottom={"1px solid black"}
       display="flex"
-      justifyContent={"space-between"}
+      alignItems="center"
     >
+      <Box ml={10}>
+        <Image src={Masai} boxSize="50px" />
+      </Box>
       <ButtonGroup spacing={1} colorScheme="transparant" variant={"ghost"}>
         <Button
           as={Link}

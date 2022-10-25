@@ -46,7 +46,7 @@ export const List = ({ item }) => {
           as {item.type} problem's at &nbsp;
         </Text>
         <Text as="span" fontSize={"xs"}>
-          {moment(item.scheduled).format("d MMM, yyyy - hh:mm")}
+          {moment(item.scheduled).format("lll")}
         </Text>
       </Box>
     </Box>

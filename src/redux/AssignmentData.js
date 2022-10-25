@@ -45,13 +45,21 @@ export const {
   setLoader,
 } = slice.actions;
 
-export const getAssignments = () => async (dispatch, getState) => {
+export const getAssignments = (body) => async (dispatch, getState) => {
   try {
     const { currentPage } = getState().Assignments;
     dispatch(setListLoader(true));
-    const assignments = await axios.get(
-      `${BASICURL}/assignment?size=3&page=${currentPage}`
-    );
+    let assignments;
+    if (body) {
+      assignments = await axios.get(
+        `${BASICURL}/assignment/api?size=3&page=${currentPage}&${body}`
+      );
+    } else {
+      assignments = await axios.get(
+        `${BASICURL}/assignment?size=3&page=${currentPage}`
+      );
+    }
+    console.log(assignments.data);
     dispatch(addAssignments(assignments.data));
   } catch (err) {
     console.log(err);

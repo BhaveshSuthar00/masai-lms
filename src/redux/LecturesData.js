@@ -12,6 +12,7 @@ const slice = createSlice({
     ListLoader: true,
     currentLecture: {},
     totalEntry: 0,
+    searchQuery: "",
   },
   reducers: {
     addLectures: (state, action) => {
@@ -32,6 +33,9 @@ const slice = createSlice({
     setListLoader: (state, action) => {
       state.ListLoader = action.payload;
     },
+    setSearchQuery: (state, action) => {
+      state.searchQuery = action.payload;
+    },
   },
 });
 
@@ -43,13 +47,18 @@ export const {
   setCurrentLecture,
 } = slice.actions;
 
-export const getLectures = () => async (dispatch, getState) => {
+export const getLectures = (body) => async (dispatch, getState) => {
   try {
     dispatch(setListLoader(true));
     const { currentPage } = getState().Lectures;
-    const data = await axios.get(
-      `${BASICURL}/lecture?size=3&page=${currentPage}`
-    );
+    let data;
+    if (body) {
+      data = await axios.get(
+        `${BASICURL}/lecture/api?size=3&page=${currentPage}&${body}`
+      );
+    } else {
+      data = await axios.get(`${BASICURL}/lecture?size=3&page=${currentPage}`);
+    }
     dispatch(addLectures(data.data));
     dispatch(setListLoader(false));
   } catch (error) {

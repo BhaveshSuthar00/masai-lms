@@ -45,7 +45,6 @@ export const Lecture = () => {
       category: categoryIs,
       scheduled: theDate,
     };
-    console.log(obj);
     Post(obj, "lecture").then((res) => {
       toast({
         title: "Success.",

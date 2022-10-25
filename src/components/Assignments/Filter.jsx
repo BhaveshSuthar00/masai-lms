@@ -14,7 +14,7 @@ import {
   type,
 } from "../../constants/constants";
 import { useDispatch } from "react-redux";
-import { getLectures } from "../../redux/LecturesData";
+import { getAssignments } from "../../redux/AssignmentData";
 const flexBox = {
   mt: 4,
   justifyContent: "space-between",
@@ -42,7 +42,7 @@ export const Filter = () => {
       optional: "",
     });
     setSearch("");
-    dispatch(getLectures());
+    dispatch(getAssignments());
   };
   const setSearchFun = (value) => {
     if (interval.current) {
@@ -60,8 +60,7 @@ export const Filter = () => {
         bodySet += `${key}=${objSet[key].toLowerCase()}&`;
       }
     }
-    console.log(bodySet);
-    dispatch(getLectures(bodySet));
+    dispatch(getAssignments(bodySet));
   }, [objSet, search]);
 
   return (
