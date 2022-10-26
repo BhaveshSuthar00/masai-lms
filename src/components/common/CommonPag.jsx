@@ -2,32 +2,36 @@ import React from "react";
 import { chakra, Box, Text } from "@chakra-ui/react";
 import { v4 as uuid } from "uuid";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
-import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { getAssignments, setPage, setpage } from "../../redux/AssignmentData";
-const AssignmentPagination = () => {
-  const { totalPages, assignments, ListLoader, totalEntry, currentPage } =
-    useSelector((state) => state.Assignments);
+const CommonPag = ({
+  totalPages,
+  itemList,
+  ListLoader,
+  totalEntry,
+  currentPage,
+  setCurrentFun,
+  getListFun,
+}) => {
   const dispatch = useDispatch();
   const handlePageChange = (page, changePage) => {
     if (changePage) {
-      dispatch(setPage(changePage));
-      dispatch(getAssignments());
+      setCurrentFun(changePage);
+      getListFun();
+
       return;
     } else if (currentPage === 1 && page === -1) {
       return;
     } else if (currentPage === totalPages && page === 1) {
       return;
     } else {
-      dispatch(setPage(currentPage + page));
-      dispatch(getAssignments());
+      setCurrentFun(currentPage + page);
+      getListFun();
     }
   };
   if (ListLoader) {
     return <></>;
   }
   if (totalPages === 0) return <></>;
-
   return (
     <Box
       display="flex"
@@ -43,11 +47,11 @@ const AssignmentPagination = () => {
         <Text>
           Showing{" "}
           {totalPages !== currentPage
-            ? assignments.length * currentPage - 2
-            : totalEntry - assignments.length}
+            ? itemList.length * currentPage - 2
+            : totalEntry - itemList.length}
           &nbsp;to&nbsp;
           {totalPages !== currentPage
-            ? assignments.length * currentPage
+            ? itemList.length * currentPage
             : totalEntry}
           &nbsp;of {totalEntry} results
         </Text>
@@ -96,7 +100,7 @@ const AssignmentPagination = () => {
 };
 const PaginationButton = ({ children, onClick, isDisabled, isActive }) => {
   const activeStyle = {
-    bg: "darkblue",
+    bg: "#2536eb",
     color: "white",
   };
   return (
@@ -104,9 +108,8 @@ const PaginationButton = ({ children, onClick, isDisabled, isActive }) => {
       py={1}
       px={3}
       onClick={onClick}
-      border="1px solid"
-      borderColor={"blue.100"}
-      rounded="md"
+      border="1px solid #e5e7eb"
+      borderColor={"#e5e7eb"}
       _hover={!isDisabled && activeStyle}
       cursor={isDisabled && "not-allowed"}
       {...(isActive && activeStyle)}
@@ -116,4 +119,4 @@ const PaginationButton = ({ children, onClick, isDisabled, isActive }) => {
   );
 };
 
-export default AssignmentPagination;
+export default CommonPag;

@@ -59,7 +59,6 @@ export const getAssignments = (body) => async (dispatch, getState) => {
         `${BASICURL}/assignment?size=3&page=${currentPage}`
       );
     }
-    console.log(assignments.data);
     dispatch(addAssignments(assignments.data));
   } catch (err) {
     console.log(err);

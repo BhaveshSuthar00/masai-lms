@@ -19,7 +19,7 @@ export const List = ({ item }) => {
           as={Link}
           to={`/${item.link}/${item._id}`}
           color={"darkblue"}
-          fontSize="xl"
+          fontSize="lg"
           _hover={{ textDecoration: "underline" }}
         >
           {item.headers}

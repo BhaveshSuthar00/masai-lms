@@ -8,21 +8,14 @@ import {
   FormLabel,
 } from "@chakra-ui/react";
 import { v4 as uuid } from "uuid";
-import {
-  category,
-  instructorListLecture,
-  type,
-} from "../../constants/constants";
-import { useDispatch } from "react-redux";
-import { getLectures } from "../../redux/LecturesData";
+
 const flexBox = {
   mt: 4,
   justifyContent: "space-between",
   display: "flex",
 };
-export const Filter = () => {
+export const Filter = ({ getListFun, category, instructor, type }) => {
   const [search, setSearch] = useState("");
-  const dispatch = useDispatch();
   const interval = useRef();
   const [objSet, setObjState] = useState({
     category: "",
@@ -42,7 +35,7 @@ export const Filter = () => {
       optional: "",
     });
     setSearch("");
-    dispatch(getLectures());
+    getListFun();
   };
   const setSearchFun = (value) => {
     if (interval.current) {
@@ -60,13 +53,13 @@ export const Filter = () => {
         bodySet += `${key}=${objSet[key].toLowerCase()}&`;
       }
     }
-    console.log(bodySet);
-    dispatch(getLectures(bodySet));
+    if (bodySet) {
+      getListFun(bodySet);
+    }
   }, [objSet, search]);
-
   return (
     <>
-      <Box mb={6} p={6} boxShadow="md">
+      <Box mb={6} p={6} boxShadow="sm">
         <Box>
           <FormControl>
             <FormLabel htmlFor="title">Title</FormLabel>
@@ -120,10 +113,8 @@ export const Filter = () => {
                 setObjState({ ...objSet, instructor: e.target.value })
               }
             >
-              {instructorListLecture &&
-                instructorListLecture.map((item) => (
-                  <option key={uuid()}>{item}</option>
-                ))}
+              {instructor &&
+                instructor.map((item) => <option key={uuid()}>{item}</option>)}
             </Select>
           </FormControl>
         </Box>
@@ -157,11 +148,19 @@ export const Filter = () => {
         </Box>
       </Box>
 
-      <Box display={"flex"} justifyContent="flex-end" pr={6}>
+      <Box
+        display={"flex"}
+        justifyContent="flex-end"
+        pr={6}
+        mb={1}
+        pb={4}
+        borderBottom="1px solid #e5e7eb"
+      >
         <Button
           backgroundColor={"#4f46e5"}
           textColor="white"
           onClick={resetFun}
+          fontSize="sm"
           _hover={{ backgroundColor: "#4f46e5", textColor: "white" }}
         >
           Reset Filters

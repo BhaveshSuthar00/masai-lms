@@ -36,6 +36,16 @@ const slice = createSlice({
     setSearchQuery: (state, action) => {
       state.searchQuery = action.payload;
     },
+    resetLecutres: (state, action) => {
+      state.lectures = [];
+      state.currentPage = 1;
+      state.totalPages = 1;
+      state.loader = true;
+      state.ListLoader = true;
+      state.currentLecture = {};
+      state.totalEntry = 0;
+      state.searchQuery = "";
+    },
   },
 });
 
@@ -45,6 +55,7 @@ export const {
   setListLoader,
   setLoader,
   setCurrentLecture,
+  resetLecutres,
 } = slice.actions;
 
 export const getLectures = (body) => async (dispatch, getState) => {
@@ -76,5 +87,4 @@ export const getCurrentLecture = (id) => async (dispatch) => {
   }
 };
 
-// https://masai-lms-lpg.herokuapp.com/assignment
 export default slice.reducer;
