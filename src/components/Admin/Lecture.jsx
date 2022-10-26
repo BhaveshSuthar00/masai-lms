@@ -132,12 +132,14 @@ export const Lecture = () => {
             <Select
               placeholder="Choose"
               id="instructor"
-              onChange={(e) => setInstructor(e.target.value)}
+              onChange={(e) => setInstructor(e.target.value.toLowerCase())}
               value={instructor}
             >
               {instructorListLecture &&
                 instructorListLecture.map((item) => (
-                  <option key={uuid()}>{item}</option>
+                  <option key={uuid()} value={item.toLowerCase()}>
+                    {item}
+                  </option>
                 ))}
             </Select>
           </FormControl>
@@ -148,11 +150,13 @@ export const Lecture = () => {
               placeholder="Choose"
               id="type"
               value={typeIs}
-              onChange={(e) => setType(e.target.value)}
+              onChange={(e) => setType(e.target.value.toLowerCase())}
             >
               {typeLectures &&
                 typeLectures.map((item) => (
-                  <option key={uuid()}>{item}</option>
+                  <option key={uuid()} value={item.toLowerCase()}>
+                    {item}
+                  </option>
                 ))}
             </Select>
           </FormControl>
@@ -178,10 +182,14 @@ export const Lecture = () => {
               placeholder="Choose"
               id="category"
               value={categoryIs}
-              onChange={(e) => setCategoryIs(e.target.value)}
+              onChange={(e) => setCategoryIs(e.target.value.toLowerCase())}
             >
               {category &&
-                category.map((item) => <option key={uuid()}>{item}</option>)}
+                category.map((item) => (
+                  <option key={uuid()} value={item.toLowerCase()}>
+                    {item}
+                  </option>
+                ))}
             </Select>
           </FormControl>
         </Box>

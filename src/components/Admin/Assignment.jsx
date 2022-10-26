@@ -139,12 +139,14 @@ export const Assignment = () => {
             <Select
               placeholder="Choose"
               id="instructor"
-              onChange={(e) => setInstructor(e.target.value)}
+              onChange={(e) => setInstructor(e.target.value.toLowerCase())}
               value={instructor}
             >
               {instructorList &&
                 instructorList.map((item) => (
-                  <option key={uuid()}>{item}</option>
+                  <option key={uuid()} value={item.toLowerCase()}>
+                    {item}
+                  </option>
                 ))}
             </Select>
           </FormControl>
@@ -155,9 +157,14 @@ export const Assignment = () => {
               placeholder="Choose"
               id="type"
               value={typeIs}
-              onChange={(e) => setType(e.target.value)}
+              onChange={(e) => setType(e.target.value.toLowerCase())}
             >
-              {type && type.map((item) => <option key={uuid()}>{item}</option>)}
+              {type &&
+                type.map((item) => (
+                  <option key={uuid()} value={item.toLowerCase()}>
+                    {item}
+                  </option>
+                ))}
             </Select>
           </FormControl>
 
@@ -167,7 +174,7 @@ export const Assignment = () => {
               placeholder="Choose"
               value={optional ? "Yes" : "No"}
               id="optional"
-              onChange={(e) => setOptional(e.target.value)}
+              onChange={(e) => setOptional(e.target.value.toLowerCase())}
             >
               {options &&
                 options.map((item) => (
@@ -182,10 +189,14 @@ export const Assignment = () => {
               placeholder="Choose"
               id="category"
               value={categoryIs}
-              onChange={(e) => setCategoryIs(e.target.value)}
+              onChange={(e) => setCategoryIs(e.target.value.toLowerCase())}
             >
               {category &&
-                category.map((item) => <option key={uuid()}>{item}</option>)}
+                category.map((item) => (
+                  <option key={uuid()} value={item.toLowerCase()}>
+                    {item}
+                  </option>
+                ))}
             </Select>
           </FormControl>
         </Box>
